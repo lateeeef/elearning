@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/redirect.php';
+include '../includes/redirectstaff.php';
 include '../includes/config.php';
 
 $question = '';
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise -- Admiralty University Of Nigeria Web-based system for distance learning</title>
-    <link rel="shortcut icon" href="images/adunrbg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/adunrbg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -88,13 +88,13 @@ if (isset($_POST['submit'])) {
                 <ul class="list-group list-group-flush ">
                     <li class="list-group-item">
                         <a href="#" class="text-decoration-none text-dark stretched-link d-flex align-items-center my-2">
-                            <iconify-icon class="me-2" icon="iconoir:send-dollars" width="28" height="28"></iconify-icon>
+                            <iconify-icon class="me-2" icon="akar-icons:question" width="28" height="28"></iconify-icon>
                             <div>Set Question</div>
                         </a>
                     </li>
                     <li class="list-group-item ">
                         <a href="#" class="text-decoration-none text-dark stretched-link d-flex align-items-center my-2">
-                            <iconify-icon class="me-2" icon="ph:money" width="28" height="28"></iconify-icon>
+                            <iconify-icon class="me-2" icon="material-symbols:assignment-outline" width="28" height="28"></iconify-icon>
                             <div>Start Test</div>
                         </a>
                     </li>

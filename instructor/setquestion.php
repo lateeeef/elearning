@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../includes/redirect.php';
 include '../includes/config.php';
+include '../includes/redirectstaff.php';
 
 $question = '';
 $answer = '';
@@ -63,7 +63,7 @@ if(isset($_POST['submit'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise -- Admiralty University Of Nigeria Web-based system for distance learning</title>
-    <link rel="shortcut icon" href="images/adunrbg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/adunrbg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"

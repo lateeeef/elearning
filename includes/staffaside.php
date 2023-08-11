@@ -1,3 +1,16 @@
+<?php
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("location:../index.php");
+}
+
+?>
+<style>
+    .menu a:hover{
+        background-color: #e4e2e2;
+    }
+</style>
+
 <body>
     <div class="card sticky-top bg-white p-2 rounded bg-">
         <a href="dashboard.php" class="btn d-flex align-items-center text-decoration-none text-dark mb-1" id="settings">
@@ -24,7 +37,7 @@
             <iconify-icon class="me-2" icon="ant-design:setting-outlined" width="30" height="30"></iconify-icon>
             <div>Settings</div>
         </a>
-        <a href="#" class="btn d-flex align-items-center text-decoration-none text-danger mb-1" id="settings">
+        <a href="<?= $_SERVER['PHP_SELF'] ?>?logout=1" class="btn d-flex align-items-center text-decoration-none text-danger mb-1" id="settings">
         <iconify-icon class="me-2" icon="clarity:logout-line" width="30" height="30" rotate="180deg"></iconify-icon>
             <div>Sign Out</div>
         </a>

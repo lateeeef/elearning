@@ -6,7 +6,7 @@ if ($_SERVER['PHP_SELF'] == '/elearning/dashboard.php') {
         })
     </script>";
 }
-if ($_SERVER['PHP_SELF'] == '/elearning/lessons.php') {
+if ($_SERVER['PHP_SELF'] == '/elearning/lessons.php' || $_SERVER['PHP_SELF'] == '/elearning/lecture.php') {
     echo "<script>
         $(document).ready(function(){
             $('#lessons').addClass('bg-primary');
@@ -17,7 +17,7 @@ if ($_SERVER['PHP_SELF'] == '/elearning/settings.php') {
     echo "<script>
         $(document).ready(function(){
             $('#settings').addClass('bg-primary');
-        })
+        }) 
     </script>";
 }
 ?>

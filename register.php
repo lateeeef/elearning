@@ -77,7 +77,7 @@ if (isset($_POST['register'])) {
 </style>
 
 <body>
-    <main >
+    <main class="" style="margin-top: 60px;">
 
         <article class="container-sm col-lg-6 bg-white px-3 py-1 mt-4 shadow">
             <div>

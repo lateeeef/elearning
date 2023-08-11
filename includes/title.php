@@ -1,6 +1,9 @@
 <?php
 $title = '';
 
+if ($_SERVER['PHP_SELF'] == '/elearning/lecture.php') {
+    $title = 'Lecture';
+}
 if ($_SERVER['PHP_SELF'] == '/elearning/instructor/dashboard.php' || $_SERVER['PHP_SELF'] == '/elearning/dashboard.php') {
     $title = 'Dashboard';
 }
@@ -41,7 +44,7 @@ if ($_SERVER['PHP_SELF'] == '/elearning/instructor/exercise.php') {
     $title = 'Set questions';
 }
 if ($_SERVER['PHP_SELF'] == '/elearning/instructor/blacklist.php') {
-    $title = 'Blacklistw';
+    $title = 'Blacklist';
 }
 
 ?>

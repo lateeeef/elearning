@@ -2,6 +2,7 @@
 session_start();
 include '../includes/config.php';
 $staffid = '';
+$password = '';
 $error = [];
 
 if (isset($_POST['signin'])) {
@@ -14,7 +15,7 @@ if (isset($_POST['signin'])) {
         return $data;
     }
 
-
+    
     $staffid = cleaninput($_POST['staffid']);
     $password = cleaninput($_POST['password']);
 
@@ -55,7 +56,7 @@ if (isset($_POST['signin'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Signin -- Admiralty University Of Nigeria Web-based system for distance learning</title>
-    <link rel="shortcut icon" href="images/adunrbg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/adunrbg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -64,11 +65,15 @@ if (isset($_POST['signin'])) {
 <body>
     <main class="container-sm col-lg-7 bg-white px-3 py-4 shadow text-center" style="margin-top: 100px;">
         <div class=" d-md-none">
-            <img height="100" width="150" src="../images/adunlogo.jpg" alt="adunlogo">
+            <a href="../index.php" title="Go Home">
+                <img height="100" width="150" src="../images/adunlogo.jpg" alt="adunlogo">
+            </a>
         </div>
         <div class="d-flex align-items-center justify-content-around py-5">
             <div class="d-none d-md-block">
-                <img height="250" width="300" src="../images/adunlogo.jpg" alt="adunlogo">
+                <a href="../index.php" title="Go Home">
+                    <img height="250" width="300" src="../images/adunlogo.jpg" alt="adunlogo">
+                </a>
             </div>
             <div class="col-md-6 col-12">
                 <h3 class="mb-4">Staff Login</h3>
@@ -85,10 +90,10 @@ if (isset($_POST['signin'])) {
                 </div>
 
                     <div>
-                        <input class="form-control mb-3" type="number" name="staffid" id="" required placeholder=" Staff ID" value="<?=$staffid?>">
+                        <input class="form-control mb-3" type="number" name="staffid" id="staffId" required placeholder=" Staff ID" value="<?=$staffid?>">
                     </div>
                     <div>
-                        <input class="form-control mb-3" type="password" name="password" id="" required placeholder="******">
+                        <input class="form-control mb-3" type="password" name="password" id="password" required placeholder="****" value="<?= $password ?>">
                     </div>
                     <input class="btn btn-primary w-100 mb-3" type="submit" name="signin" value="Sign In">
                 </form>

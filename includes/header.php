@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("location:index.php");
+    header("location:../index.php");
     // echo "<script>location = 'index.php')</script>";
     //     echo "<script>
     //     $(document).ready(function(){

@@ -62,11 +62,15 @@ if (isset($_POST['login'])) {
 <body> 
     <main class="container-sm col-lg-7 bg-white px-3 py-4 shadow text-center" style="margin-top: 100px;">
         <div class=" d-md-none">
-            <img height="100" width="150" src="images/adunlogo.jpg" alt="adunlogo">
+            <a href="index.php" title="Go Home">
+                <img height="100" width="150" src="images/adunlogo.jpg" alt="adunlogo">
+            </a>
         </div>
         <div class="d-flex align-items-center justify-content-around py-5">
             <div class="d-none d-md-block">
-                <img height="250" width="300" src="images/adunlogo.jpg" alt="adunlogo">
+                <a href="index.php" title="Go Home">
+                    <img height="250" width="300" src="images/adunlogo.jpg" alt="adunlogo">
+                </a>
             </div>
             <div class="col-md-6 col-12">
                 <h3 class="mb-4">Student Login</h3>

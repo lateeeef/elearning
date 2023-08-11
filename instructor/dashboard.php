@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../includes/config.php';
-include '../includes/redirect.php';
+include '../includes/redirectstaff.php';
 
 // print_r($_SESSION)
 ?>
@@ -14,7 +14,7 @@ include '../includes/redirect.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecturer Dashboaard -- Admiralty University Of Nigeria Web-based system for distance learning</title>
-    <link rel="shortcut icon" href="images/adunrbg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/adunrbg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -57,47 +57,56 @@ include '../includes/redirect.php';
                     </div>
 
                 </div>
-                <div class="card p-3 mb-2" id="materials">
-                    <div class="fw-bold fs-5 mb-2">Your Materials <hr></div>
+                <div class="card p-3" id="materials">
+                    <div class="fw-bold fs-5">Your Materials
+                        <hr>
+                    </div>
                     <div class="">
-                        <?php
-                        $staffId = $_SESSION['staffid'];
-                        $sql = "SELECT * FROM `lesson` WHERE staffid = '$staffId' ORDER BY date_added DESC";
-                        $query = mysqli_query($connect, $sql);
-                        $count = mysqli_num_rows($query);
-                        if ($count == 0) {
-                            $sender = '';
-                            $title = '';
-                            $staffId = '';
-                            echo "
+                        <div class="p-1 d-none" id="noMaterial" style="margin: 10px 0 ;">
+                            <div class="fs-4 text-secondary fw-bold text-center">
+                                You have no material uploaded yet
+                            </div>
+                        </div>
+                        <div class="">
+                            <?php
+                            $staffId = $_SESSION['staffid'];
+                            $sql = "SELECT * FROM `lesson` WHERE staffid = '$staffId' ORDER BY date_added DESC";
+                            $query = mysqli_query($connect, $sql);
+                            $count = mysqli_num_rows($query);
+                            if ($count == 0) {
+                                $sender = '';
+                                $title = '';
+                                $staffId = '';
+                                echo "
                             <script>
                             $(document).ready(function(){
-                                // $('#noReport').removeClass('d-none')
-                                $('#materials').css('display', 'none')
+                                 $('#noMaterial').removeClass('d-none')
                             })
                             </script>
                             ";
-                        } 
-                        while ($row = mysqli_fetch_assoc($query)) :
-                        ?>
-                            <div class="row mb-1">
-                                <div class="col-md-3"><span class="fw-bold">Course title: </span><?php echo $row['course'] ?></div>
-                                <div class="col-md-3"><span class="fw-bold">Course code: </span><?php echo $row['code'] ?></div>
-                                <div class="col-md-3"><span class="fw-bold">Department: </span><?php echo $row['department'] ?></div>
-                                <div class="col-md-3"><span class="fw-bold">Level: </span><?php echo $row['level'] ?></div>
-                                <div class="col-md-3"><span class="fw-bold">Topic: </span><?php echo $row['topic'] ?></div>
-                                <div class="col-md-5"><span class="fw-bold">Date Uploaded:  </span><?php echo $row['date_added'] ?></div>
-                            </div>
-                            <div class="my-2">
-                                <div class="text-truncate"><?php echo $row['note'] . $row['pdf'] ?></div>
-                            </div>
-                            <div>
-                                <hr class="mx-5 ">
-                            </div>
-                        <?php endwhile; ?>
-                    </div> 
+                            };
+                            while ($row = mysqli_fetch_assoc($query)) :
+                            ?>
+                                <div class="card my-1 p-3">
+                                    <a class="text-decoration-none text-dark row" href="mybook.php?id=<?=$row['id']?>">
+                                        <div class="col-md-3"><span class="fw-bold">Course title: </span><?php echo $row['course'] ?></div>
+                                        <div class="col-md-3"><span class="fw-bold">Course code: </span><?php echo $row['code'] ?></div>
+                                        <div class="col-md-3"><span class="fw-bold">Department: </span><?php echo $row['department'] ?></div>
+                                        <div class="col-md-3"><span class="fw-bold">Level: </span><?php echo $row['level'] ?></div>
+                                        <div class="col-md-3"><span class="fw-bold">Topic: </span><?php echo $row['topic'] ?></div>
+                                        <div class="col-md-5"><span class="fw-bold">Date Uploaded: </span><?php echo $row['date_added'] ?></div>
+                                        <div class="my-2">
+                                            <div class="text-truncate"><?php echo $row['note'] . $row['pdf'] ?></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endwhile; ?>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
         </div>
     </main>

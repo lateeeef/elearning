@@ -1,10 +1,10 @@
 <?php
 session_start();
 include '../includes/config.php';
-$staffid = '';
+$passphrase = '';
 $error = [];
 
-if (isset($_POST['login'])) {
+if (isset($_POST['signin'])) {
 
     function cleaninput($formdata)
     {
@@ -24,20 +24,19 @@ if (isset($_POST['login'])) {
     // print_r($row);
     // echo $encryptpassword;
 
-    if (mysqli_num_rows($query) == 1 && $encryptpassword == $row['password']) {
+    if (mysqli_num_rows($query) == 1) {
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['lname'] = $row['lname'];
         $_SESSION['email'] = $row['email'];
-        $_SESSION['department'] = $row['department'];
+        $_SESSION['passphrase'] = $row['passphrase'];
         $_SESSION['level'] = $row['level'];
-        $_SESSION['staffid'] = $row['staffid'];
         $_SESSION['phone'] = $row['phone'];
         $_SESSION['password'] = $row['password'];
         $_SESSION['image'] = $row['image'];
 
         header('location:dashboard.php');
     } else {
-        array_push($error, 'Incorrect Password or staffid');
+        array_push($error, 'Incorrect Passphrase');
     }
 }
 
@@ -62,28 +61,32 @@ if (isset($_POST['login'])) {
 <body>
     <main class="container-sm col-lg-7 bg-white px-3 py-4 shadow text-center" style="margin-top: 100px;">
         <div class=" d-md-none">
-            <img height="100" width="150" src="../images/adunlogo.jpg" alt="adunlogo">
+            <a href="../index.php" title="Go Home">
+                <img height="100" width="150" src="../images/adunlogo.jpg" alt="adunlogo">
+            </a>
         </div>
         <div class="d-flex align-items-center justify-content-around flex-column py-5">
             <div class="d-none d-md-block">
-                <img height="150" width="180" src="../images/adunlogo.jpg" alt="adunlogo">
+                <a href="../index.php" title="Go Home">
+                    <img height="150" width="180" src="../images/adunlogo.jpg" alt="adunlogo">
+                </a>
             </div>
             <div class="col-md-6 col-12">
                 <h3 class="mb-4">Admin Login</h3>
 
                 <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                <div class="mt-3 mb-3">
-                    <?php foreach ($error as $errors) {
-                        echo '
+                    <div class="mt-3 mb-3">
+                        <?php foreach ($error as $errors) {
+                            echo '
                             <div class="container-sm  px-2 py-1 " style="border-left: 4px solid red; background-color: rgb(235, 219, 219);">
                                 <b>Error: </b>' . $errors . '
                             </div>';
-                        echo '';
-                    } ?>
-                </div>
+                            echo '';
+                        } ?>
+                    </div>
 
                     <div>
-                        <input class="form-control mb-3" type="text" name="passphrase" id="" required placeholder="Enter Passphrase">
+                        <input class="form-control mb-3" type="text" name="passphrase" id="" value="<?= $passphrase ?>" required placeholder="Enter Passphrase">
                     </div>
                     <input class="btn btn-primary w-100 mb-3" type="submit" name="signin" value="Sign In">
                 </form>

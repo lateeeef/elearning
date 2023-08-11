@@ -1,7 +1,14 @@
 <?php
 session_start();
 include '../includes/config.php';
+include '../includes/redirectadmin.php';
+// print_r($_SESSION);
 
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $sql1 = "DELETE FROM `staffpin` WHERE id =  '$id'";
+    $query1 = mysqli_query($connect, $sql1);
+}
 ?>
 
 
@@ -63,8 +70,9 @@ include '../includes/config.php';
                                     <td><?= $row['pin'] ?></td>
                                     <td class="small"><?= $row['dateadded'] ?></td>
                                     <td class="small text-danger text-center">
-                                        <iconify-icon icon="carbon:delete" width="25" height="25" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal"></iconify-icon>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <iconify-icon icon="carbon:delete" width="25" height="25" style="cursor: pointer;" 
+                                        onclick='if(confirm("Are you sure you want to delete this PIN? Staff will not be able to use it again")){location.href="dashboard.php?delete=<?=$row["id"]?>"}' data-bs-toggle="modal" data-bs-target="#exampleModal"></iconify-icon>
+                                        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content text-dark">
                                                     <div class="modal-header">
@@ -77,31 +85,13 @@ include '../includes/config.php';
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a class="btn btn-danger" href="<?= $_SERVER['PHP_SELF'] ?>?delete=1">Delete</a>
+                                                        <a class="btn btn-danger" href="<?= $_SERVER['PHP_SELF'] ?>?delete=<?=$row["id"]?>">Delete</a>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </td>
-                                    <?php
-                                    if (isset($_GET['delete']) == 1) {
-                                        $nike = "    <script>
-                                                $(document).ready(function() {
-                                                    $('#unusedpin').val()
-
-                                                })
-                                                </script>
-                                                ";
-                                        echo $nike;
-
-                                        $pin = $row['pin'];
-                                        $sql1 = "DELETE FROM `staffpin` WHERE pin =  '$pin'";
-                                        $query1 = mysqli_query($connect, $sql1);
-                                    }
-
-                                    ?>
-
                                 </tr>
                             </tbody>
                         <?php endwhile; ?>

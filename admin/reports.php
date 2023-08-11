@@ -1,7 +1,8 @@
 <?php
 session_start();
 include '../includes/config.php';
-include '../includes/redirect.php';
+include '../includes/redirectadmin.php';
+
 
 if (isset($_GET['clear']) == 1) {
     $sql = "DELETE FROM `report` ";
@@ -25,7 +26,7 @@ if (isset($_GET['clear']) == 1) {
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background: #e4e2e2;">
     <header>
         <?php include '../includes/header.php' ?>
     </header>

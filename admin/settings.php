@@ -1,6 +1,7 @@
 <?php
 session_start();
-include '../includes/redirect.php';
+include '../includes/redirectadmin.php';
+
 
 // print_r($_SESSION)
 ?>
@@ -19,7 +20,7 @@ include '../includes/redirect.php';
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background: #e4e2e2;">
     <header>
         <?php include '../includes/header.php' ?>
     </header>

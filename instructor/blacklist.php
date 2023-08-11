@@ -1,23 +1,19 @@
 <?php
 session_start();
 include '../includes/config.php';
-$detail = ' ';
-$searchby = ' ';
+include '../includes/redirectstaff.php';
+$criteria = '0';
+$detail = '';
+$searchby = '';
 $check = '';
 $article = '';
 $studentInfo = [];
 
-$result = '';
-$fullname = '';
-$matric = '';
-$email = '';
-$phone = '';
-$department = '';
-$level = '';
 $symbol = '';
 
 
-// print_r($studentInfo);
+// print_r($_SESSION);
+
 if (isset($_GET['search'])) {
     function cleaninput($formdata)
     {
@@ -26,58 +22,11 @@ if (isset($_GET['search'])) {
         $data = htmlspecialchars($formdata);
         return $data;
     }
-    $detail = cleaninput($_GET['detail']);
     $searchby = cleaninput($_GET['searchby']);
+    $detail = cleaninput($_GET['detail']);
 
-    // $select = "SELECT * FROM `tblstudent` WHERE fname = '$detail' OR email = '$detail' 
-    // OR department = '$detail' OR phone = '$detail' 
-    // OR matric = '$detail' OR level = '$detail'";
-
-    $result = 'Search Result(s)';
-    $fullname = 'Fullname';
-    $matric = 'Matric';
-    $email = 'Email';
-    $phone = 'Phone';
-    $department = 'Department';
-    $level = 'Level';
     $symbol = '&CirclePlus;';
-
-
-    $article = '<div class="rounded p-3 bg-light">
-    <div>
-        <h5>' . $result . '</h5>
-    </div>
-    <table class="table table-bordered table-hover table-striped">
-        <thead>
-            <th scope="col">' . $fullname . '</th>
-            <th scope="col">' . $matric . '</th>
-            <th scope="col">' . $email . '</th>
-            <th scope="col">' . $phone . '</th>
-            <th scope="col">' . $department . '</th>
-            <th scope="col">' . $level . '</th>
-        </thead>
-        ';
-    $select = "SELECT * FROM `tblstudent` WHERE `$searchby` = '$detail' ";
-    $check = mysqli_query($connect, $select);
-
-    // $studentInfo = mysqli_fetch_assoc($check);
-    while ($studentInfo = mysqli_fetch_assoc($check)) {
-        '
-            <tbody>
-                <tr>
-                    <td>' . $studentInfo["fname"] . '</td>
-                    <td>' . $studentInfo["matric"] . '</td>
-                    <td>' . $studentInfo["email"] . '</td>
-                    <td>' . $studentInfo["phone"] . '</td>
-                    <td>' . $studentInfo["department"] . '</td>
-                    <td>' . $studentInfo["level"] . '</td>
-                </tr>
-            </tbody>
-        ';
-    }
-    '
-    </table>
-</div>';
+    $criteria = "`$searchby` = '$detail'";
 }
 ?>
 
@@ -89,7 +38,7 @@ if (isset($_GET['search'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADMINISTRATIVE DASHBOARD ADUN -- Web-based Learning System</title>
+    <title>Block Student ADUN -- Web-based Learning System</title>
     <link rel="shortcut icon" href="../images/adunlogo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
@@ -108,20 +57,109 @@ if (isset($_GET['search'])) {
                 <?php include '../includes/staffaside.php' ?>
             </div>
 
-            <div class=" col-md-9 bg- ">
+            <div class=" col-md-9 bg-white ">
                 <?php include '../includes/title.php' ?>
-                <div class="p-3 bg-white">
-                    <form action="#" method="post">
-                        <div class="form-group mb-2">
-                            <label class="mb-2 fw-bold" for="matric">Student Matric Number</label>
-                            <input class="form-control" type="text" name="matric" id="matric">
+
+                <div class="mb-2 p-2">
+                    <p>Blocked students will not be able to access your course untill you unblock them.</p>
+
+                    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get" class="">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="search" class="ms-2" style="font-size: 13px; color: blue; text-transform: capitalize;"><?php echo $symbol . ' ' . $searchby ?></label>
+                                <select class="form-select" name="searchby" id="search" required>
+                                    <option value="">Search Student by</option>
+                                    <option value="fname">Fullname</option>
+                                    <option value="matric">Matric Number</option>
+                                    <option value="email">Email</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="department">Department</option>
+                                    <option value="level">Level</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fw-bold" for="detail"></label>
+                                <div class="col-md-">
+                                    <input class="form-control" type="text" name="detail" id="detail" placeholder="Enter Detail" value="<?= $detail ?>" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-center">
-                            <input class="btn btn-primary " name="search" type="submit" value="Search">
+                            <input type="submit" value="Search" name="search" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
 
+
+
+
+                <div class="rounded p-3 bg-light" id="tbody">
+                    <div>
+                        <h5>Students</h5>
+                    </div>
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">Matric</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Level</th>
+                        </thead>
+                        <?php
+                        $sql = "SELECT * FROM `tblstudent` WHERE $criteria ";
+                        $query = mysqli_query($connect, $sql);
+                        $count = mysqli_num_rows($query);
+                        if ($count == 0) {
+                            echo "
+                            <script>
+                            $(document).ready(function(){
+                                 $('#tbody').addClass('d-none')
+                                 $('#null').removeClass('d-none')
+                            })
+                            </script>
+                            ";
+                        }
+                        while ($row = mysqli_fetch_assoc($query)) :
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <td><?= $row['fname'] ?></td>
+                                    <td style="text-transform: uppercase;"><?= $row['matric'] ?></td>
+                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['phone'] ?></td>
+                                    <td><?= $row['department'] ?></td>
+                                    <td><?= $row['level'] ?></td>
+                                    <td class="text-center">
+                                        <?php
+                                        if (isset($_GET['block'])) {
+                                            $staffId = $_SESSION['staffid'];
+                                            $matric = $row['matric'];
+
+                                            $sql = "INSERT INTO `staffblacklist`(`staffid`, `matric`) VALUES ('$staffId', '$matric')";
+                                            $query = mysqli_query($connect, $sql);
+
+                                            if ($query) {
+                                                echo "<script> alert ('Student Blocked ')</script>";
+                                            }
+                                        }
+                                        ?>
+                                        <a href="#" onclick='if(confirm("Are you sure you want to block this Student?")){location.href="<?= $_SERVER["PHP_SELF"] ?>?block=<?= $row["id"] ?>"}' class="btn btn-danger btn-sm">
+                                            Block
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <?php
+                        endwhile;
+
+                        ?>
+                    </table>
+                </div>
+
+                <div class="d-none p-2 text-danger" id="null">
+                    <p class="">Student record might not be found if details provided do not match. Please provide adequate information </p>
+                </div>
             </div>
 
         </div>
