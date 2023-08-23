@@ -39,11 +39,11 @@ if ($_SERVER['PHP_SELF'] == '/elearning/settings.php') {
                 <iconify-icon class="me-2" icon="ic:baseline-play-lesson" width="30" height="30" ></iconify-icon>
                 <div style=" font-size: 16px;">Lessons</div>
             </a>
-            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" id="excercises">
+            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('Available Soon')" id="excercises">
                 <iconify-icon class="me-2" icon="simple-line-icons:question" width="30" height="30" ></iconify-icon>
                 <div style=" font-size: 16px;">Excercises</div>
             </a>
-            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" id="scores">
+            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('Available Soon')" id="scores">
                 <iconify-icon class="me-2" icon="fluent:textbox-16-regular" width="30" height="30"></iconify-icon>
                 <div style=" font-size: 16px;">Scores</div>
             </a>
@@ -51,7 +51,7 @@ if ($_SERVER['PHP_SELF'] == '/elearning/settings.php') {
                 <iconify-icon class="me-2" icon="ant-design:setting-outlined" width="30" height="30"></iconify-icon>
                 <div style=" font-size: 16px;">Settings</div>
             </a>
-            <a href="#" class="btn d-flex align-items-center text-decoration-none text-danger my-2 fw-bold" id="logout">
+            <a href="<?= $_SERVER['PHP_SELF'] ?>?logout=1" class="btn d-flex align-items-center text-decoration-none text-danger my-2 fw-bold" id="logout">
                 <iconify-icon class="me-2" icon="clarity:logout-line" width="30" height="30" rotate="180deg"></iconify-icon>
                 <div style=" font-size: 16px;">Logout</div>
             </a>

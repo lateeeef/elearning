@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <ul class="list-group list-group-flush ">
                     <li class="list-group-item">
-                        <a href="#" class="text-decoration-none text-dark stretched-link d-flex align-items-center my-2">
+                        <a href="setquestion.php" class="text-decoration-none text-dark stretched-link d-flex align-items-center my-2">
                             <iconify-icon class="me-2" icon="akar-icons:question" width="28" height="28"></iconify-icon>
                             <div>Set Question</div>
                         </a>
