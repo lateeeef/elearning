@@ -26,12 +26,8 @@ if (isset($_POST['signin'])) {
 
     if (mysqli_num_rows($query) == 1) {
         $_SESSION['fname'] = $row['fname'];
-        $_SESSION['lname'] = $row['lname'];
-        $_SESSION['email'] = $row['email'];
         $_SESSION['passphrase'] = $row['passphrase'];
-        $_SESSION['level'] = $row['level'];
-        $_SESSION['phone'] = $row['phone'];
-        $_SESSION['password'] = $row['password'];
+        $_SESSION['name'] = $row['name'];
         $_SESSION['image'] = $row['image'];
 
         header('location:dashboard.php');
@@ -51,7 +47,7 @@ if (isset($_POST['signin'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Signin -- Admiralty University Of Nigeria Web-based system for distance learning</title>
+    <title>ADMINISTRATIVE PANEL -- Admiralty University Of Nigeria Web-based system for distance learning</title>
     <link rel="shortcut icon" href="images/adunrbg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>

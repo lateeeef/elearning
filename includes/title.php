@@ -43,7 +43,7 @@ if ($_SERVER['PHP_SELF'] == '/elearning/lessons.php') {
 if ($_SERVER['PHP_SELF'] == '/elearning/instructor/exercise.php') {
     $title = 'Set questions';
 }
-if ($_SERVER['PHP_SELF'] == '/elearning/instructor/blacklist.php') {
+if ($_SERVER['PHP_SELF'] == '/elearning/instructor/blacklist.php' || $_SERVER['PHP_SELF'] == '/elearning/admin/blacklist.php' || $_SERVER['PHP_SELF'] == '/elearning/admin/blackliststudent.php') {
     $title = 'Blacklist';
 }
 

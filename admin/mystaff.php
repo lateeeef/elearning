@@ -20,8 +20,8 @@ include '../includes/redirectadmin.php';
 </head>
 
 <body style="background: #e4e2e2;">
-    <header>
-        <?php include '../includes/header.php' ?>
+<header>
+        <?php include '../includes/adminheader.php' ?>
     </header>
 
 

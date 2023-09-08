@@ -15,7 +15,7 @@ if (isset($_POST['signin'])) {
         return $data;
     }
 
-    
+
     $staffid = cleaninput($_POST['staffid']);
     $password = cleaninput($_POST['password']);
 
@@ -27,7 +27,19 @@ if (isset($_POST['signin'])) {
     // print_r($row);
     // echo $encryptpassword;
 
-    if (mysqli_num_rows($query) == 1 && $encryptpassword == $row['password']) {
+    $checkStaff = "SELECT * FROM `blacklist` WHERE staffid = '$staffid' ";
+    $queryStaff = mysqli_query($connect, $checkStaff);
+
+    if (mysqli_num_rows($query) == 1 && $encryptpassword != $row['password']) {
+        array_push($error, 'Incorrect Password or staffid');
+    }
+
+    elseif (mysqli_num_rows($queryStaff) > 0) {
+        array_push($error, 'Account blocked by the admin');
+    }
+
+    if (count($error) == 0) {
+
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['lname'] = $row['lname'];
         $_SESSION['email'] = $row['email'];
@@ -39,8 +51,6 @@ if (isset($_POST['signin'])) {
         $_SESSION['image'] = $row['image'];
 
         header('location:dashboard.php');
-    } else {
-        array_push($error, 'Incorrect Password or staffid');
     }
 }
 
@@ -79,18 +89,18 @@ if (isset($_POST['signin'])) {
                 <h3 class="mb-4">Staff Login</h3>
 
                 <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                <div class="mt-3 mb-3">
-                    <?php foreach ($error as $errors) {
-                        echo '
+                    <div class="mt-3 mb-3">
+                        <?php foreach ($error as $errors) {
+                            echo '
                             <div class="container-sm  px-2 py-1 " style="border-left: 4px solid red; background-color: rgb(235, 219, 219);">
                                 <b>Error: </b>' . $errors . '
                             </div>';
-                        echo '';
-                    } ?>
-                </div>
+                            echo '';
+                        } ?>
+                    </div>
 
                     <div>
-                        <input class="form-control mb-3" type="number" name="staffid" id="staffId" required placeholder=" Staff ID" value="<?=$staffid?>">
+                        <input class="form-control mb-3" type="number" name="staffid" id="staffId" required placeholder=" Staff ID" value="<?= $staffid ?>">
                     </div>
                     <div>
                         <input class="form-control mb-3" type="password" name="password" id="password" required placeholder="****" value="<?= $password ?>">

@@ -48,7 +48,7 @@ $query = mysqli_query($connect, $sql);
                 <?php include 'includes/studentaside.php' ?>
             </div>
 
-            <div class="col-md-10 px-3">0----
+            <div class="col-md-10 px-3">
                 <?php
                 include 'includes/title.php'
                 ?>

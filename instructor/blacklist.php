@@ -132,19 +132,22 @@ if (isset($_GET['search'])) {
                                     <td><?= $row['level'] ?></td>
                                     <td class="text-center">
                                         <?php
+                                        $matric = $row['matric'];
+
                                         if (isset($_GET['block'])) {
                                             $staffId = $_SESSION['staffid'];
-                                            $matric = $row['matric'];
 
                                             $sql = "INSERT INTO `staffblacklist`(`staffid`, `matric`) VALUES ('$staffId', '$matric')";
                                             $query = mysqli_query($connect, $sql);
 
                                             if ($query) {
                                                 echo "<script> alert ('Student Blocked ')</script>";
+                                            }else{
+                                                echo "<script> alert ('unsuccesful ')</script>";
                                             }
                                         }
                                         ?>
-                                        <a href="#" onclick='if(confirm("Are you sure you want to block this Student?")){location.href="<?= $_SERVER["PHP_SELF"] ?>?block=<?= $row["id"] ?>"}' class="btn btn-danger btn-sm">
+                                        <a href="" onclick='if(confirm("Are you sure you want to block this Student?")){location.href="<?= $_SERVER["PHP_SELF"] ?>?block=<?= $row["id"] ?>"}' class="btn btn-danger btn-sm">
                                             Block
                                         </a>
                                     </td>

@@ -27,8 +27,8 @@ if (isset($_GET['clear']) == 1) {
 </head>
 
 <body style="background: #e4e2e2;">
-    <header>
-        <?php include '../includes/header.php' ?>
+<header>
+        <?php include '../includes/adminheader.php' ?>
     </header>
 
 

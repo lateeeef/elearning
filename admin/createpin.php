@@ -59,7 +59,7 @@ if(isset($_POST['generate'])){
 
 <body style="background: #e4e2e2;">
     <header>
-        <?php include '../includes/header.php' ?>
+        <?php include '../includes/adminheader.php' ?>
     </header>
 
 

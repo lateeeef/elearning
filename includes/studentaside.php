@@ -39,11 +39,11 @@ if ($_SERVER['PHP_SELF'] == '/elearning/settings.php') {
                 <iconify-icon class="me-2" icon="ic:baseline-play-lesson" width="30" height="30" ></iconify-icon>
                 <div style=" font-size: 16px;">Lessons</div>
             </a>
-            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('Available Soon')" id="excercises">
+            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('No Exercise available yet')" id="excercises">
                 <iconify-icon class="me-2" icon="simple-line-icons:question" width="30" height="30" ></iconify-icon>
                 <div style=" font-size: 16px;">Excercises</div>
             </a>
-            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('Available Soon')" id="scores">
+            <a href="#" class="btn d-flex align-items-center text-decoration-none text-white my-2 fw-bold" onclick="alert('No scores available')" id="scores">
                 <iconify-icon class="me-2" icon="fluent:textbox-16-regular" width="30" height="30"></iconify-icon>
                 <div style=" font-size: 16px;">Scores</div>
             </a>

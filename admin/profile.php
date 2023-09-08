@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../includes/redirect.php';
 include '../includes/redirectadmin.php';
 
 // print_r($_SESSION)
@@ -22,7 +21,7 @@ include '../includes/redirectadmin.php';
 
 <body style="background: #e4e2e2;">
     <header>
-        <?php include '../includes/header.php' ?>
+        <?php include '../includes/adminheader.php' ?>
     </header>
 
 
@@ -40,40 +39,35 @@ include '../includes/redirectadmin.php';
 
                         <div class="text-center">
                             <a href="#" class="text-center text-black">
-                                <?php
-                                if (!isset($_SESSION['fname'])  || $_SESSION['fname'] != '') {
-                                    // $image = "uploads/" . $_SESSION['image'] . "";
-                                    $image = "../images/default.jpg";
-                                } else {
-                                    $image = "../images/default.jpg";
-                                }
-                                ?>
-                                <img src="<?= $image ?>" alt="" class="rounded my-2" width="130" height="130">
+                                <img src="../images/adunlogo.jpg" alt="" class="rounded my-2" width="130" height="130">
                             </a>
-                            <div class="fs-4 fw-bold"><?php echo $_SESSION['lname'].' '.$_SESSION['fname'] ?></div>
                             <p class="mb-1"></p>
                         </div>
 
                         <div class="container fs-5">
                             <div class="row my-2">
-                                <div class="col-3 text-secondary">Firstname</div>
-                                <div class="col-9 "><?php echo $_SESSION['fname'] ?></div>
+                                <div class="col-3 text-secondary">Name</div>
+                                <div class="col-9 "><?php echo $_SESSION['name'] ?></div>
                             </div>
                             <div class="row my-2">
-                                <div class="col-3 text-secondary">Lastname</div>
-                                <div class="col-9 "><?php echo $_SESSION['lname'] ?></div>
+                                <div class="col-3 text-secondary">Year Established</div>
+                                <div class="col-9 ">1999</div>
                             </div>
                             <div class="row my-2">
-                                <div class="col-3 text-secondary">Email</div>
-                                <div class="col-9 "><?php echo $_SESSION['email'] ?></div>
+                                <div class="col-3 text-secondary">Current Chancellor</div>
+                                <div class="col-9 ">Dr Astalamingo Buchika</div>
                             </div>
                             <div class="row my-2">
-                                <div class="col-3 text-secondary">Staff ID</div>
-                                <div class="col-9 "><?php echo $_SESSION['staffid'] ?></div>
+                                <div class="col-3 text-secondary">Vice Chancellor</div>
+                                <div class="col-9 ">Dr Bahbanluba Timisu</div>
                             </div>
                             <div class="row my-2">
-                                <div class="col-3 text-secondary">Phone</div>
-                                <div class="col-9 "><?php echo $_SESSION['phone'] ?></div>
+                                <div class="col-3 text-secondary">Brief History</div>
+                                <div class="col-9 ">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nostrum fuga, praesentium nihil, vero laborum voluptatum aperiam accusantium voluptates eius mollitia odit alias sequi nemo hic sed aut quam deleniti.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nostrum fuga, praesentium nihil, vero laborum voluptatum aperiam accusantium voluptates eius mollitia odit alias sequi nemo hic sed aut quam deleniti.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nostrum fuga, praesentium nihil, vero laborum voluptatum aperiam accusantium voluptates eius mollitia odit alias sequi nemo hic sed aut quam deleniti.</p>
+                                </div>
                             </div>
 
                         </div>

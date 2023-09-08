@@ -14,7 +14,6 @@ if (isset($_POST['login'])) {
         return $data;
     }
 
-
     $matric = cleaninput($_POST['matric']);
     $password = cleaninput($_POST['password']);
 
@@ -26,7 +25,19 @@ if (isset($_POST['login'])) {
     // print_r($row);
     // echo $encryptpassword;
 
-    if (mysqli_num_rows($query) == 1 && $encryptpassword == $row['password']) {
+
+    $checkStudent = "SELECT * FROM `blacklilststudent` WHERE matric = '$matric' ";
+    $queryStudent = mysqli_query($connect, $checkStudent);
+
+    if (mysqli_num_rows($query) == 1 && $encryptpassword != $row['password']) {
+        array_push($error, 'Incorrect Password');
+    }
+
+    elseif (mysqli_num_rows($queryStudent) > 0) {
+        array_push($error, 'Account blocked by the admin');
+    }
+
+    if (count($error) == 0) {
         $_SESSION['fname'] = $row['fname'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['department'] = $row['department'];
@@ -38,9 +49,8 @@ if (isset($_POST['login'])) {
 
         header('location:dashboard.php');
 
-    } else {
-        array_push($error, 'Incorrect Password or Matric Number');
     }
+
 
     // setcookie('email', $email, time() + 1579, '/');
 }

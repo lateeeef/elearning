@@ -3,6 +3,17 @@ session_start();
 include '../includes/config.php';
 include '../includes/redirectadmin.php';
 // print_r($_SESSION);
+if (isset($_GET['unblock'])) {
+    $id = $_GET['unblock'];
+    $sql1 = "DELETE FROM `blacklist` WHERE id =  '$id'";
+    $query1 = mysqli_query($connect, $sql1);
+}
+if (isset($_GET['unblockstudent'])) {
+    $id = $_GET['unblockstudent'];
+    $sql1 = "DELETE FROM `blacklilststudent` WHERE id =  '$id'";
+    $query1 = mysqli_query($connect, $sql1);
+}
+
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
@@ -28,7 +39,7 @@ if (isset($_GET['delete'])) {
 
 <body style="background: #e4e2e2;">
     <header>
-        <?php include '../includes/header.php' ?>
+        <?php include '../includes/adminheader.php' ?>
     </header>
 
 
@@ -39,6 +50,84 @@ if (isset($_GET['delete'])) {
             </div>
 
             <div class=" col-md-9 bg- ">
+                <div class="rounded p-3 bg-light" id="unusedPins">
+                    <div>
+                        <h5>Blocked Staff</h5>
+                    </div>
+                    <table class="table table-striped">
+                        <?php
+                        $sql = "SELECT * FROM `blacklist` ORDER BY `date_added` ";
+                        $query = mysqli_query($connect, $sql);
+                        $count = mysqli_num_rows($query);
+                        if ($count == 0) {
+                            $sender = '';
+                            $title = '';
+                            $staffId = '';
+                            echo "
+                            <script>
+                            $(document).ready(function(){
+                                // $('#noReport').removeClass('d-none')
+                                $('#unusedPins').css('display', 'none')
+                            })
+                            </script>
+                            ";
+                        }
+
+                        while ($row = mysqli_fetch_assoc($query)) :
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <td id=""><?= $row['fname'] ?></td>
+                                    <td><?= $row['staffid'] ?></td>
+                                    <td class="small"><?= $row['date_added'] ?></td>
+                                    <td class="small text-danger text-center">
+                                        <button class="btn btn-sm btn-primary" onclick='if(confirm("Are you sure you want to unblock Staff?")){location.href="dashboard.php?unblock=<?= $row["id"] ?>"}'>Unblock</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <?php endwhile; ?>
+                    </table>
+                </div>
+
+                <div class="rounded p-3 bg-light" id="unusedPins">
+                    <div>
+                        <h5>Blocked Students</h5>
+                    </div>
+                    <table class="table table-striped">
+                        <?php
+                        $sql = "SELECT * FROM `blacklilststudent` ORDER BY `dateadded` ";
+                        $query = mysqli_query($connect, $sql);
+                        $count = mysqli_num_rows($query);
+                        if ($count == 0) {
+                            $sender = '';
+                            $title = '';
+                            $staffId = '';
+                            echo "
+                            <script>
+                            $(document).ready(function(){
+                                // $('#noReport').removeClass('d-none')
+                                $('#unusedPins').css('display', 'none')
+                            })
+                            </script>
+                            ";
+                        }
+
+                        while ($row = mysqli_fetch_assoc($query)) :
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <td id=""><?= $row['name'] ?></td>
+                                    <td><?= $row['matric'] ?></td>
+                                    <td class="small"><?= $row['dateadded'] ?></td>
+                                    <td class="small text-danger text-center">
+                                        <button class="btn btn-sm btn-primary" onclick='if(confirm("Are you sure you want to unblock Staff?")){location.href="dashboard.php?unblockstudent=<?= $row["id"] ?>"}'>Unblock</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <?php endwhile; ?>
+                    </table>
+                </div>
+
                 <div class="rounded p-3 bg-light" id="unusedPins">
                     <div>
                         <h5>Unused PINs</h5>
@@ -60,7 +149,7 @@ if (isset($_GET['delete'])) {
                             })
                             </script>
                             ";
-                        } 
+                        }
 
                         while ($row = mysqli_fetch_assoc($query)) :
                         ?>
@@ -70,8 +159,7 @@ if (isset($_GET['delete'])) {
                                     <td><?= $row['pin'] ?></td>
                                     <td class="small"><?= $row['dateadded'] ?></td>
                                     <td class="small text-danger text-center">
-                                        <iconify-icon icon="carbon:delete" width="25" height="25" style="cursor: pointer;" 
-                                        onclick='if(confirm("Are you sure you want to delete this PIN? Staff will not be able to use it again")){location.href="dashboard.php?delete=<?=$row["id"]?>"}' data-bs-toggle="modal" data-bs-target="#exampleModal"></iconify-icon>
+                                        <iconify-icon icon="carbon:delete" width="25" height="25" style="cursor: pointer;" onclick='if(confirm("Are you sure you want to delete this PIN? Staff will not be able to use it again")){location.href="dashboard.php?delete=<?= $row["id"] ?>"}' data-bs-toggle="modal" data-bs-target="#exampleModal"></iconify-icon>
                                         <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content text-dark">
@@ -85,7 +173,7 @@ if (isset($_GET['delete'])) {
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a class="btn btn-danger" href="<?= $_SERVER['PHP_SELF'] ?>?delete=<?=$row["id"]?>">Delete</a>
+                                                        <a class="btn btn-danger" href="<?= $_SERVER['PHP_SELF'] ?>?delete=<?= $row["id"] ?>">Delete</a>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
